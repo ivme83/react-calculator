@@ -1,0 +1,10 @@
+.container {
+    width: 500px;
+    margin: 100px auto 0px auto;
+}
+
+.calc-container {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 400px;
+}
