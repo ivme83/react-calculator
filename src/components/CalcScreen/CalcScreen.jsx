@@ -11,9 +11,14 @@ let CalcScreen = (props) => {
 }
 
 function mapStateToProps(state){
-    console.log(state);
-    return {
-        currentOperand: state.calc.firstOperand,
+    const { currentOperator, firstOperand, secondOperand, solution } = state.calc;
+    
+    if (solution !== "") {
+        return { currentOperand: solution };
+    } else if (currentOperator === "") {
+        return { currentOperand: firstOperand };
+    } else {
+        return { currentOperand: secondOperand };
     }
 }
 

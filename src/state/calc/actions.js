@@ -1,29 +1,21 @@
 import { createActions } from 'redux-actions';
 
 export const {
-    increment,
-    decrement,
-    resetAmount,
-    addOperand1,
-    addOperand2,
+    addToFirstOperand,
+    addToSecondOperand,
     setOperator,
+    setSolution,
 } = createActions({
-    INCREMENT: (amount = 1) => ({
-        amount
-    }),
-    DECREMENT: (amount = 1) => ({
-        amount: -amount
-    }),
-    RESET_AMOUNT: (resetAmt = 10) => ({
-        resetAmt
-    }),
-    ADD_OPERAND_1: (newDigit = "") => ({
+    ADD_TO_FIRST_OPERAND: (newDigit = "") => ({
         newDigit
     }),
-    ADD_OPERAND_2: (newDigit = "") => ({
+    ADD_TO_SECOND_OPERAND: (newDigit = "") => ({
         newDigit
     }),
     SET_OPERATOR: (currentOperator = "+") => ({
         currentOperator
+    }),
+    SET_SOLUTION: (solution = "") => ({
+        solution
     }),
 });

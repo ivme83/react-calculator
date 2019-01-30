@@ -1,14 +1,11 @@
 import {
     handleActions,
-    combineActions
 }                   from "redux-actions";
 import {
-    increment,
-    decrement,
-    resetAmount,
-    addOperand1,
-    addOperand2,
+    addToFirstOperand,
+    addToSecondOperand,
     setOperator,
+    setSolution,
 }                   from "./actions";
  
 const defaultState = {
@@ -16,39 +13,34 @@ const defaultState = {
     firstOperand: "",
     secondOperand: "",
     currentOperator: "",
+    solution: ""
 };
  
 const reducer = handleActions(
   {
-    [combineActions(increment, decrement)]: (
-        state,
-        { payload: { amount } }
-    ) => {
-        return { ...state, counter: state.counter + amount };
-    },
-    [resetAmount]: (
-        state,
-        { payload: { resetAmt } }
-    ) => {
-        return { ...state, counter: resetAmt };
-    },
-    [addOperand1]: (
+    [addToFirstOperand]: (
         state,
         { payload: { newDigit }}
     ) => {
         return { ...state, firstOperand: state.firstOperand + newDigit };
     },
-    [addOperand2]: (
+    [addToSecondOperand]: (
         state,
         { payload: { newDigit }}
     ) => {
-        return { ...state, firstOperand: state.secondOperand + newDigit };
+        return { ...state, secondOperand: state.secondOperand + newDigit };
     },
     [setOperator]: (
         state,
         { payload: { currentOperator }}
     ) => {
         return { ...state, currentOperator }
+    },
+    [setSolution]: (
+        state,
+        { payload: { solution }}
+    ) => {
+        return { ...state, solution }
     },
   },
   defaultState
