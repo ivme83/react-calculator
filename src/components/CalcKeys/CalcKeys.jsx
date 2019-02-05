@@ -6,6 +6,7 @@ import {
     addToSecondOperand,
     setOperator,
     setSolution,
+    allClear,
 }                           from "../../state/calc/actions";
 
 import "./CalcKeys.css";
@@ -20,10 +21,20 @@ class CalcKeys extends Component {
     }
 
     addToCurrentOperand = (newDigit) => {
-        if (this.props.currentOperator === "") {
-            this.props.addToFirstOperand(newDigit);
+        const { firstOperand, secondOperand, currentOperator } = this.props;
+
+        if (currentOperator === "") {
+            if (firstOperand === "" && newDigit === "0") {
+                // do nothing
+            } else {
+                this.props.addToFirstOperand(newDigit);
+            }
         } else {
-            this.props.addToSecondOperand(newDigit);
+            if (secondOperand === "" && newDigit === "0") {
+                // do nothing
+            } else {
+                this.props.addToSecondOperand(newDigit);
+            }
         }
     }
 
@@ -36,27 +47,30 @@ class CalcKeys extends Component {
     solveOperation = () => {
         let { firstOperand, secondOperand, currentOperator } = this.props;
         let solution = 0;
-        firstOperand = +firstOperand;
-        secondOperand = +secondOperand;
 
-        switch(currentOperator) {
-            case "*":
-                solution = firstOperand * secondOperand;
-                break;
-            case "/":
-                solution = firstOperand / secondOperand;
-                break;
-            case "+":
-                solution = firstOperand + secondOperand;
-                break;
-            case "-":
-                solution = firstOperand - secondOperand;
-                break;
-            default:
-                break;
-        };
+        if (firstOperand !== "" && secondOperand !== "" && currentOperator !== "") {
+            firstOperand = +firstOperand;
+            secondOperand = +secondOperand;
 
-        this.props.setSolution(solution);
+            switch(currentOperator) {
+                case "*":
+                    solution = firstOperand * secondOperand;
+                    break;
+                case "/":
+                    solution = firstOperand / secondOperand;
+                    break;
+                case "+":
+                    solution = firstOperand + secondOperand;
+                    break;
+                case "-":
+                    solution = firstOperand - secondOperand;
+                    break;
+                default:
+                    break;
+            };
+
+            this.props.setSolution(solution);
+        }
     }
 
     addDecimal = () => {
@@ -90,8 +104,8 @@ class CalcKeys extends Component {
                 <div className="buttons" onClick={(e) => this.setCurrentOperator("*")}  value="*">*</div>
                 <div className="buttons" onClick={(e) => this.setCurrentOperator("+")}  value="+">+</div>
                 <div className="buttons" onClick={(e) => this.setCurrentOperator("-")}  value="-">-</div>
-                <div className="buttons" onClick={(e) => this.addDecimal()} value=".">.</div>
-                <div className="buttons" value="all-clear">AC</div>
+                <div className="buttons" onClick={(e) => this.addDecimal()}             value=".">.</div>
+                <div className="buttons" onClick={(e) => this.props.allClear()}         value="all-clear">AC</div>
                 <div className="buttons" onClick={(e) => this.solveOperation()}         value="="> = </div>
             </div>
         );
@@ -112,6 +126,9 @@ function mapDispatchToProps(dispatch, props){
     setSolution(solution) {
         dispatch(setSolution(solution));
     },
+    allClear() {
+        dispatch(allClear());
+    }
   }
 }
 

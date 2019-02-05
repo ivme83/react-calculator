@@ -6,6 +6,7 @@ import {
     addToSecondOperand,
     setOperator,
     setSolution,
+    allClear,
 }                   from "./actions";
  
 const defaultState = {
@@ -41,6 +42,12 @@ const reducer = handleActions(
         { payload: { solution }}
     ) => {
         return { ...state, solution }
+    },
+    [allClear]: (
+        state,
+        { payload: { resetValue }}
+    ) => {
+        return { ...state, firstOperand: "", secondOperand: "", currentOperator: "", solution: "" }
     },
   },
   defaultState

@@ -5,6 +5,7 @@ export const {
     addToSecondOperand,
     setOperator,
     setSolution,
+    allClear,
 } = createActions({
     ADD_TO_FIRST_OPERAND: (newDigit = "") => ({
         newDigit
@@ -17,5 +18,8 @@ export const {
     }),
     SET_SOLUTION: (solution = "") => ({
         solution
+    }),
+    ALL_CLEAR: (resetValue = 0) => ({
+        resetValue
     }),
 });

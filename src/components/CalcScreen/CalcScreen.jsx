@@ -17,6 +17,8 @@ function mapStateToProps(state){
         return { currentOperand: solution };
     } else if (currentOperator === "") {
         return { currentOperand: firstOperand };
+    } else if (secondOperand === "") {
+        return { currentOperand: currentOperator };
     } else {
         return { currentOperand: secondOperand };
     }
